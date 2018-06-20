@@ -21,6 +21,7 @@ import com.wardabbass.redit.ui.viewpager.NonSwipeCrossFadeViewPager
 import com.wardabbass.redit.ui.viewpager.ReditFragmentAdapter
 import com.wardabbass.redit.viewmodels.MainActivityViewModel
 import org.jetbrains.anko.dip
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity(), RedditPostClickDelegate, RedditPostBookMarkDelegate {
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity(), RedditPostClickDelegate, RedditPostBoo
     companion object {
         const val EXTRA_QUERY = "query"
         const val EXTRA_SELECTED_SCREEN = "screen"
+        const val MIN_QUERY_FOR_SEARCH = 3
     }
 
     private lateinit var mainActivityViewModel: MainActivityViewModel
@@ -154,17 +156,20 @@ class MainActivity : AppCompatActivity(), RedditPostClickDelegate, RedditPostBoo
      */
     private fun handleQuerySubmitted(query: String) {
         //toast("query $query")
-        mainActivityViewModel.query.value = query
+        if (query.length >= MIN_QUERY_FOR_SEARCH)
+            mainActivityViewModel.query.value = query
+        else
+            longToast(getString(R.string.min_search_query))
     }
 
     private fun handleSearchMenuCollapsed() {
-       // toast("menu collapsed")
+        // toast("menu collapsed")
         searchView?.setQuery("", false)
         mainActivityViewModel.query.value = ""
     }
 
     private fun handleSearchMenuExpanded() {
-       // toast("menu expanded")
+        // toast("menu expanded")
 
         //   clearSearchMenuItem?.isVisible = false
 
@@ -178,7 +183,7 @@ class MainActivity : AppCompatActivity(), RedditPostClickDelegate, RedditPostBoo
     }
 
     override fun onReditPostBokkmarked(post: ReditPost, bookMarked: Boolean) {
-      //  toast("${post.title} is bookmarked? $bookMarked")
+        //  toast("${post.title} is bookmarked? $bookMarked")
         val bookMarksFrag = reditFragmentAdapter.getCachedItem(1) as BookmarkedFragment
         if (bookMarked) {
             bookMarksFrag.makeBookmark(post)
