@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/feed" android:title="@string/top_feed" android:icon="@drawable/ic_view_list"/>
+    <item android:id="@+id/fav" android:title="@string/favorites" android:icon="@drawable/ic_favorite"/>
+</menu>

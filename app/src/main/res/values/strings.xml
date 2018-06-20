@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">redit</string>
+    <string name="search">Search</string>
+    <string name="clear_search">Clear Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="top_feed">Top Feed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

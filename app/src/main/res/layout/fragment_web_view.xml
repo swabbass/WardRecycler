@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:clickable="true"
+    tools:context=".ui.fragments.WebViewFragment">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/ic_arrow_back">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginRight="?actionBarSize"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingRight="8dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="18dp"
+                tools:text="@tools:sample/lorem/random" />
+
+            <ToggleButton
+                android:id="@+id/toggleBookmarked"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/bookmark_toggle"
+                android:button="@null"
+                android:textOff=""
+                android:textOn="" />
+        </FrameLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <com.wardabbass.redit.common.ui.RedditSwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_marginTop="?actionBarSize"
+        android:layout_height="match_parent">
+        <com.asksira.webviewsuite.WebViewSuite
+            android:id="@+id/webViewSuite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:enableHorizontalScrollBar="false"
+            app:enableJavaScript="false"
+            app:enableVerticalScrollBar="false"
+            app:overrideEmailLink="true"
+            app:overrideTelLink="true"
+            app:inflationDelay="380"
+            app:showZoomControl="false"
+            app:url="https://www.google.com"
+            app:webViewProgressBarStyle="none" />
+
+    </com.wardabbass.redit.common.ui.RedditSwipeRefreshLayout>
+
+</FrameLayout>
