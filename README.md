@@ -33,7 +33,7 @@ Step 2. Add the dependency
 
 ## Basic and Simple
 
-from xml:
+### from xml:
 ```
 <com.ward.wrecycler.WardRecycler
     android:layout_width="match_parent"
@@ -41,7 +41,7 @@ from xml:
     android:layout_height="match_parent"/>
 ```
 
-from code you can initialize using proper constructor :
+### from code you can initialize using proper constructor :
 
 ```
 WardRecycler(context)
@@ -55,7 +55,7 @@ Or
 WardRecycler(context,attr,theme)
 ```
 
-set whatever adapter you want and any subclass of LinearlayoutManager like GridLayoutManager :
+### set whatever adapter you want and any subclass of LinearlayoutManager like GridLayoutManager :
 
 ```
 wardRecycler.setAdapter(adapter)
@@ -63,7 +63,7 @@ wardRecycler.setAdapter(adapter)
 wardRecycler.layoutManager=LinearLayoutManager(context) or GridLayoutManager(context,spanCount)
 ```
 
-Callbacks using function passing ^_^ :
+### Callbacks using function passing ^_^ :
 
 ```
         wardRecycler.onRefresh = {
@@ -78,7 +78,7 @@ Callbacks using function passing ^_^ :
         wardRecycler.initLoading()
 ```
 
-Refreshing and load more functionality:
+### Refreshing and load more functionality:
 
 ```
 //To disable pull to refresh
@@ -100,7 +100,7 @@ wardRecycler.enableLoadMore=true
 wardRecycler.pageSize=DEFAULT_PAGE_SIZE
 ```
 
-Customization:
+### Customization:
 
 ```
 
