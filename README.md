@@ -7,6 +7,28 @@ A wrapper for recycler view with pull to refresh and load more functionality.
 
 This library is written in 100% kotlin.
 
+## install
+
+Step 1. Add the JitPack repository to your build file
+Add it in your root build.gradle at the end of repositories:
+
+```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+Step 2. Add the dependency
+
+```
+	dependencies {
+	        implementation 'com.github.swabbass:wardRecycler:1.0'
+	}
+```
+
 ## Basic and Simple
 
 from xml:
