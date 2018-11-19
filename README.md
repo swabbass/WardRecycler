@@ -1,7 +1,9 @@
 
 # WardRecycler
 
-[![](https://jitpack.io/v/swabbass/wardRecycler.svg)](https://jitpack.io/#swabbass/wardRecycler)
+[![](https://jitpack.io/v/swabbass/wardRecycler.svg)](https://jitpack.io/#swabbass/wardRecycler) 
+
+[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
 A wrapper for recycler view with pull to refresh and load more functionality.
 
