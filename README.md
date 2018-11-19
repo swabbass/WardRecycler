@@ -1,4 +1,8 @@
+
 # WardRecycler
+
+[![](https://jitpack.io/v/swabbass/wardRecycler.svg)](https://jitpack.io/#swabbass/wardRecycler)
+
 A wrapper for recycler view with pull to refresh and load more functionality.
 
 This library is written in 100% kotlin.
