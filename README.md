@@ -9,6 +9,8 @@ A wrapper for recycler view with pull to refresh and load more functionality.
 
 This library is written in 100% kotlin.
 
+![](2mz4n6.gif)
+
 ## install
 
 Step 1. Add the JitPack repository to your build file
