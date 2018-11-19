@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ward.wrecycler.PullToLoadView
+import com.ward.wrecycler.WardRecycler
 import com.wardabbass.redit.R
 import com.wardabbass.redit.models.ReditPost
 import com.wardabbass.redit.ui.adapter.RedditPostsAdapter
@@ -24,7 +24,7 @@ class TopFeedFragment : FilteredFragment() {
         const val TAG = "TopFeedFragment"
     }
 
-    private lateinit var pullToLoadView: PullToLoadView
+    private lateinit var wardRecycler: WardRecycler
     private lateinit var topFeedViewModel: TopFeedViewModel
     private lateinit var adapter: RedditPostsAdapter
     val compositeDisposable = CompositeDisposable()
@@ -33,9 +33,9 @@ class TopFeedFragment : FilteredFragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_top_feed, container, false)
-        pullToLoadView = rootView.findViewById(R.id.pullToLoadView)
+        wardRecycler = rootView.findViewById(R.id.pullToLoadView)
         adapter = RedditPostsAdapter()
-        pullToLoadView.setAdapter(adapter)
+        wardRecycler.setAdapter(adapter)
         topFeedViewModel = ViewModelProviders.of(this).get(TopFeedViewModel::class.java)
         return rootView
     }
@@ -43,13 +43,13 @@ class TopFeedFragment : FilteredFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        pullToLoadView.onRefresh = {
+        wardRecycler.onRefresh = {
             handleRefresh()
         }
-        pullToLoadView.onLoadMore = { currentItemCount, pageSize ->
+        wardRecycler.onLoadMore = { currentItemCount, pageSize ->
             handleLoadMore()
         }
-        pullToLoadView.initLoading()
+        wardRecycler.initLoading()
 
     }
 
@@ -74,7 +74,7 @@ class TopFeedFragment : FilteredFragment() {
     }
 
     private fun loadData(loadMore: Boolean) {
-        compositeDisposable.add(topFeedViewModel.fetchFeed(PullToLoadView.DEFAULT_PAGE_SIZE, loadMore,
+        compositeDisposable.add(topFeedViewModel.fetchFeed(WardRecycler.DEFAULT_PAGE_SIZE, loadMore,
                 onComplete = { fromLoadMore, haveMoreToLoad, data ->
                     handleNewData(fromLoadMore, haveMoreToLoad, data)
                 }, onError = {
@@ -85,8 +85,8 @@ class TopFeedFragment : FilteredFragment() {
     private fun handleNewData(fromLoadMore: Boolean, haveMoreToLoad: Boolean, data: MutableList<ReditPost>) {
 
         Log.d(TAG, "handleNewData fromLoadMore:$fromLoadMore, haveMoreToLoad:$haveMoreToLoad ")
-        pullToLoadView.isLastPage = !haveMoreToLoad
-        pullToLoadView.completeLoading()
+        wardRecycler.isLastPage = !haveMoreToLoad
+        wardRecycler.completeLoading()
 
         if (fromLoadMore) {
             adapter.addItems(data)
@@ -98,12 +98,12 @@ class TopFeedFragment : FilteredFragment() {
 
     override fun onQueryChanged() {
         if (query.isNotEmpty()) {
-            pullToLoadView.disableRefresh()
-            pullToLoadView.enableLoadMore = false
+            wardRecycler.disableRefresh()
+            wardRecycler.enableLoadMore = false
             makeFilter()
         } else {
-            pullToLoadView.enableRefresh()
-            pullToLoadView.enableLoadMore = true
+            wardRecycler.enableRefresh()
+            wardRecycler.enableLoadMore = true
             adapter.items = topFeedViewModel.reditPosts
         }
 

@@ -6,6 +6,7 @@ import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.support.annotation.ColorInt
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -18,7 +19,7 @@ import android.widget.ProgressBar
 import org.jetbrains.anko.dip
 
 
-class PullToLoadView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, theme: Int = -1) : FrameLayout(context, attributeSet, theme) {
+class WardRecycler @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, theme: Int = -1) : FrameLayout(context, attributeSet, theme) {
 
     companion object {
         const val DEFAULT_PAGE_SIZE = 25
@@ -40,9 +41,9 @@ class PullToLoadView @JvmOverloads constructor(context: Context, attributeSet: A
             updateProgressColor()
         }
 
-    private var progressBarSize: Int = 0
-    private var itemSpacing: Int = 0
-    private var pageSize = DEFAULT_PAGE_SIZE
+    var progressBarSize: Int = 0
+    var itemSpacing: Int = 0
+    var pageSize = DEFAULT_PAGE_SIZE
     /**
      * callback whenever refresh called
      */
@@ -56,15 +57,15 @@ class PullToLoadView @JvmOverloads constructor(context: Context, attributeSet: A
     private lateinit var progressView: ProgressBar
 
 
-    private var layoutManager: LinearLayoutManager = LinearLayoutManager(context)
+    var layoutManager: LinearLayoutManager = LinearLayoutManager(context)
         set(value) {
             field = value
             value.isItemPrefetchEnabled = false
             recyclerView.layoutManager = value
         }
 
-    private lateinit var recyclerView: RecyclerView
-
+    lateinit var recyclerView: RecyclerView
+        protected set
 
     private val pagingScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
@@ -110,7 +111,9 @@ class PullToLoadView @JvmOverloads constructor(context: Context, attributeSet: A
         View.inflate(context, R.layout.pull_to_load_view, this)
         layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+
         recyclerView = findViewById(R.id.recyclerView)
+
         recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
 
@@ -191,6 +194,10 @@ class PullToLoadView @JvmOverloads constructor(context: Context, attributeSet: A
     fun setAdapter(adapter: RecyclerView.Adapter<*>) {
 
         this.recyclerView.adapter = adapter
+    }
+
+    fun setColorSchemeResources(@ColorInt vararg colors: Int) {
+        swipeRefreshLayout.setColorSchemeColors(*colors)
     }
 
 }

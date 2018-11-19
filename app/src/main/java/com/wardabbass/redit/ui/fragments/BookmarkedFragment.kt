@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ward.wrecycler.PullToLoadView
+import com.ward.wrecycler.WardRecycler
 
 import com.wardabbass.redit.R
 import com.wardabbass.redit.models.ReditPost
@@ -27,7 +27,7 @@ class BookmarkedFragment : FilteredFragment() {
     }
     val compositeDisposable = CompositeDisposable()
 
-    private lateinit var pullToLoadView: PullToLoadView
+    private lateinit var wardRecycler: WardRecycler
     private lateinit var adapter: RedditPostsAdapter
     private lateinit var bookmarkedViewModel: BookmarkedViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +40,9 @@ class BookmarkedFragment : FilteredFragment() {
     }
 
     private fun initPullToLoadView(rootView: View) {
-        pullToLoadView = rootView.findViewById(R.id.pullToLoadView)
-        pullToLoadView.setAdapter(adapter)
-        pullToLoadView.disableRefresh()
+        wardRecycler = rootView.findViewById(R.id.pullToLoadView)
+        wardRecycler.setAdapter(adapter)
+        wardRecycler.disableRefresh()
     }
 
     private fun initAdapter() {

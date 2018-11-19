@@ -3,10 +3,9 @@ package com.wardabbass.redit.datalayer
 import android.util.Log
 import com.androidnetworking.AndroidNetworking
 import com.rx2androidnetworking.Rx2AndroidNetworking
-import com.ward.wrecycler.PullToLoadView.Companion.DEFAULT_PAGE_SIZE
+import com.ward.wrecycler.WardRecycler.Companion.DEFAULT_PAGE_SIZE
 import com.wardabbass.redit.models.RedditResponse
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 object ApiSource {
