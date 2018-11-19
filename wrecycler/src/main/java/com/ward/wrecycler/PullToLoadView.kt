@@ -1,7 +1,12 @@
-package com.wardabbass.redit.common.ui
+package com.ward.wrecycler
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,13 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
-import com.wardabbass.redit.R
-import com.wardabbass.redit.ui.adapter.RedditPostsAdapter
-import android.graphics.PorterDuff
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.graphics.drawable.Drawable
-import android.os.Build
 import org.jetbrains.anko.dip
 
 
@@ -35,6 +33,12 @@ class PullToLoadView @JvmOverloads constructor(context: Context, attributeSet: A
     var enableLoadMore = true
 
     var isLastPage = false
+
+    var progressColor = Color.DKGRAY
+        set(value) {
+            field = value
+            updateProgressColor()
+        }
 
     private var progressBarSize: Int = 0
     private var itemSpacing: Int = 0
@@ -129,17 +133,20 @@ class PullToLoadView @JvmOverloads constructor(context: Context, attributeSet: A
         })
         initProgressView()
         progressBarSize = resources.getDimension(R.dimen.recycler_view_progress_size).toInt()
-        itemSpacing = resources.getDimension(R.dimen.recycler_item_spacing).toInt()
     }
 
     private fun initProgressView() {
         progressView = findViewById(R.id.progressBar)
+        updateProgressColor()
+    }
+
+    private fun updateProgressColor() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             val wrapDrawable = DrawableCompat.wrap(progressView.indeterminateDrawable)
-            DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(context, R.color.colorPrimary))
+            DrawableCompat.setTint(wrapDrawable, progressColor)
             progressView.indeterminateDrawable = DrawableCompat.unwrap<Drawable>(wrapDrawable)
         } else {
-            progressView.indeterminateDrawable.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY)
+            progressView.indeterminateDrawable.setColorFilter(progressColor, PorterDuff.Mode.MULTIPLY)
         }
     }
 

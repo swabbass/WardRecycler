@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.TopFeedFragment">
 
-    <com.wardabbass.redit.common.ui.PullToLoadView
+    <com.ward.wrecycler.PullToLoadView
         android:id="@+id/pullToLoadView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

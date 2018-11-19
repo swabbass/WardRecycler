@@ -3,7 +3,7 @@ package com.wardabbass.redit.datalayer
 import android.util.Log
 import com.androidnetworking.AndroidNetworking
 import com.rx2androidnetworking.Rx2AndroidNetworking
-import com.wardabbass.redit.common.ui.PullToLoadView.Companion.DEFAULT_PAGE_SIZE
+import com.ward.wrecycler.PullToLoadView.Companion.DEFAULT_PAGE_SIZE
 import com.wardabbass.redit.models.RedditResponse
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

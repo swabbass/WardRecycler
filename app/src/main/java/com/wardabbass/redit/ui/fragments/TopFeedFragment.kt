@@ -7,8 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ward.wrecycler.PullToLoadView
 import com.wardabbass.redit.R
-import com.wardabbass.redit.common.ui.PullToLoadView
 import com.wardabbass.redit.models.ReditPost
 import com.wardabbass.redit.ui.adapter.RedditPostsAdapter
 import com.wardabbass.redit.ui.adapter.ReditPostClickListener

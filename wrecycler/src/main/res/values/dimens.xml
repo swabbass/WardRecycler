@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_bar_size">56dp</dimen>
+    <dimen name="recycler_item_spacing">8dp</dimen>
+    <dimen name="recycler_view_progress_size">32dp</dimen>
+</resources>
