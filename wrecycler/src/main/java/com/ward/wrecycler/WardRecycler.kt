@@ -19,7 +19,7 @@ import android.widget.ProgressBar
 import org.jetbrains.anko.dip
 
 
-class WardRecycler @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, theme: Int = -1) : FrameLayout(context, attributeSet, theme) {
+open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, theme: Int = -1) : FrameLayout(context, attributeSet, theme) {
 
     companion object {
         const val DEFAULT_PAGE_SIZE = 25
