@@ -26,10 +26,6 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
     }
 
     private var isLoading = false
-        set(value) {
-            field = value
-            swipeRefreshLayout.isEnabled = !field
-        }
 
     var enableLoadMore = true
 
@@ -56,7 +52,6 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
 
     private lateinit var progressView: ProgressBar
 
-
     var layoutManager: LinearLayoutManager = LinearLayoutManager(context)
         set(value) {
             field = value
@@ -78,8 +73,8 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
             val visibleItems = layoutManager.childCount
             val itemsCount = layoutManager.itemCount
 
-            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
+            val firstVisibleItemPosition = layoutManager.findFirstCompletelyVisibleItemPosition()
+            swipeRefreshLayout.isEnabled = firstVisibleItemPosition == 0
             if (!isLoading && !isLastPage) {
 
                 if ((visibleItems + firstVisibleItemPosition) >= itemsCount && firstVisibleItemPosition >= 0
@@ -111,7 +106,6 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
         View.inflate(context, R.layout.pull_to_load_view, this)
         layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
-
         recyclerView = findViewById(R.id.recyclerView)
 
         recyclerView.layoutManager = layoutManager
@@ -178,21 +172,21 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
         isLastPage = false
         isLoading = true
         onRefresh()
-        swipeRefreshLayout.isRefreshing = true
+        swipeRefreshLayout.post {
+            swipeRefreshLayout.isRefreshing = true
+        }
     }
 
     fun completeLoading() {
         isLoading = false
-        swipeRefreshLayout.isRefreshing = false
-        /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-             TransitionManager.beginDelayedTransition(this, AutoTransition())
-         }*/
+        swipeRefreshLayout.post {
+            swipeRefreshLayout.isRefreshing = false
+        }
         progressView.visibility = GONE
         recyclerView.invalidateItemDecorations()
     }
 
     fun setAdapter(adapter: RecyclerView.Adapter<*>) {
-
         this.recyclerView.adapter = adapter
     }
 
