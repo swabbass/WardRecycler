@@ -31,7 +31,7 @@ Step 2. Add the dependency
 
 ```
 	dependencies {
-	        implementation 'com.github.swabbass:wardRecycler:1.0'
+	        implementation 'com.github.swabbass:wardRecycler:{see JitPack version above}'
 	}
 ```
 
