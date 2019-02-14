@@ -93,8 +93,9 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
     private fun showProgressBar() {
 
         progressView.visibility = View.VISIBLE
-        recyclerView.invalidateItemDecorations()
-
+         recyclerView.post{
+            recyclerView.invalidateItemDecorations()
+        }
     }
 
     init {
@@ -183,7 +184,9 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
             swipeRefreshLayout.isRefreshing = false
         }
         progressView.visibility = GONE
-        recyclerView.invalidateItemDecorations()
+        recyclerView.post{
+            recyclerView.invalidateItemDecorations()
+        }
     }
 
     fun setAdapter(adapter: RecyclerView.Adapter<*>) {
