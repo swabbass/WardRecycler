@@ -30,6 +30,8 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
     var enableLoadMore = true
 
     var isLastPage = false
+    
+    var enableLoadMoreProgress = true
 
     var progressColor = Color.DKGRAY
         set(value) {
@@ -91,8 +93,8 @@ open class WardRecycler @JvmOverloads constructor(context: Context, attributeSet
     }
 
     private fun showProgressBar() {
-
-        progressView.visibility = View.VISIBLE
+        if(enableLoadMoreProgress)
+            progressView.visibility = View.VISIBLE
          recyclerView.post{
             recyclerView.invalidateItemDecorations()
         }
